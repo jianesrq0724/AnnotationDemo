@@ -1,4 +1,4 @@
-package com.example.ruiqin.annotationdemo.findview;
+package com.ruiqin.my_annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,8 +15,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BindView {
-    int id();
+    public int id();
 
-    boolean click() default false;
+    public boolean click() default false;
 
 }
