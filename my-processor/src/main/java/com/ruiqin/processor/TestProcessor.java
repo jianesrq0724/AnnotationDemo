@@ -13,16 +13,8 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-
-import static com.ruiqin.utils.Constns.ANNOTATION_TYPE_AUTOWIRED;
-import static com.ruiqin.utils.Constns.ANNOTATION_TYPE_ROUTE;
-import static com.ruiqin.utils.Constns.KEY_MODULE_NAME;
 
 /**
  * @author Carl
@@ -44,17 +36,31 @@ public class TestProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+        //生成方法
+        MethodSpec main2 = MethodSpec.methodBuilder("test")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(String.class)
+                .addParameter(String[].class, "args")
+                .addStatement("$T.out.println($S)", System.class, "Hello, Ruiqin")
+                .addStatement("return $S", "3")
+                .build();
 
+        //生成方法
         MethodSpec main = MethodSpec.methodBuilder("main")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(void.class)
                 .addParameter(String[].class, "args")
                 .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
                 .build();
+
+        //生成类
         TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(main)
+                .addMethod(main2)
                 .build();
+
+        //创建包下面的文件
         JavaFile javaFile = JavaFile.builder("com.example.helloworld", helloWorld)
                 .build();
         try {
