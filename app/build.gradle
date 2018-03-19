@@ -29,4 +29,6 @@ dependencies {
 
     annotationProcessor project(':my-processor')
     compile project(':my-annotation')
+
+
 }

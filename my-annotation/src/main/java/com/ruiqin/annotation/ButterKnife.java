@@ -7,4 +7,5 @@ package com.ruiqin.annotation;
  */
 
 public @interface ButterKnife {
+
 }
