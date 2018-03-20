@@ -1,4 +1,4 @@
-package com.example.ruiqin.annotationdemo.bind;
+package com.ruiqin.annotation.test;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

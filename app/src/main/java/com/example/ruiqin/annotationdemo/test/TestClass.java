@@ -1,5 +1,7 @@
 package com.example.ruiqin.annotationdemo.test;
 
+import com.ruiqin.annotation.test.BindPort;
+
 import java.lang.reflect.Field;
 
 /**

@@ -30,6 +30,7 @@ public class TestProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
+        // 规定需要处理的注解
         return Collections.singleton(Test.class.getCanonicalName());
     }
 
@@ -40,7 +41,6 @@ public class TestProcessor extends AbstractProcessor {
         MethodSpec main2 = MethodSpec.methodBuilder("test")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(String.class)
-                .addParameter(String[].class, "args")
                 .addStatement("$T.out.println($S)", System.class, "Hello, Ruiqin")
                 .addStatement("return $S", "3")
                 .build();
@@ -53,22 +53,32 @@ public class TestProcessor extends AbstractProcessor {
                 .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
                 .build();
 
+        MethodSpec main3 = MethodSpec.methodBuilder("main3")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .addCode("int total = 0;\n" +
+                        "for ( int i = 0; i < 10; i++ ){\n" +
+                        "  total += i; \n" +
+                        "}\n")
+                .build();
+
         //生成类
         TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addMethod(main)
                 .addMethod(main2)
+                .addMethod(main)
+                .addMethod(main3)
                 .build();
 
         //创建包下面的文件
         JavaFile javaFile = JavaFile.builder("com.example.helloworld", helloWorld)
                 .build();
+
         try {
             javaFile.writeTo(processingEnv.getFiler());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return true;
     }
 }

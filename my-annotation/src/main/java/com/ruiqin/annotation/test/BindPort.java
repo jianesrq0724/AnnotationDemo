@@ -1,4 +1,4 @@
-package com.example.ruiqin.annotationdemo.test;
+package com.ruiqin.annotation.test;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @date : 2017/12/8
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface RxBusReact {
-    String name() default "ruiqin";
+@Target(ElementType.FIELD)
+public @interface BindPort {
+    String value() default "8080";
 }

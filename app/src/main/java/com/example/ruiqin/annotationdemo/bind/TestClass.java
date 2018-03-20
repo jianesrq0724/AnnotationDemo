@@ -1,6 +1,7 @@
 package com.example.ruiqin.annotationdemo.bind;
 
-import com.example.ruiqin.annotationdemo.test.BindPort;
+import com.ruiqin.annotation.test.BindPort;
+import com.ruiqin.annotation.test.BindAddress;
 
 /**
  * @version 1.0
@@ -10,17 +11,17 @@ import com.example.ruiqin.annotationdemo.test.BindPort;
 
 public class TestClass {
     @BindAddress()
-    String address;
+    static String address;
     @BindPort()
-    private String port;
+    private static String port;
 
     private int number;
 
     public static void main(String[] args) {
-
+        printInfo();
     }
 
-    public void printInfo() {
+    public static void printInfo() {
         System.out.println("info is " + address + ":" + port);
     }
 
