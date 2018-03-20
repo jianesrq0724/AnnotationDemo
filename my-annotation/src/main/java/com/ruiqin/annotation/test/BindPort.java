@@ -11,8 +11,8 @@ import java.lang.annotation.Target;
  * @author : ruiqin.shen
  * @date : 2017/12/8
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface BindPort {
     String value() default "8080";
 }
